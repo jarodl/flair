@@ -1,0 +1,69 @@
+# About flair:
+# Flair was inspired by the book "Create Your Own Freaking Awesome Programming Language". It is
+# meant for developers who do not enjoy writing CSS. Flair translates into normal CSS.
+#
+# IDEAS:
+#       * allow classes and identifiers to 'inherit' from each other
+#       * access class and indentifier attributes from other classes/identifiers
+#       * should be able to set attributes on condition (active, hover, etc)
+#       * python like import of other files
+#       * mixins for repetitive css blocks
+
+# a simple example showing inheritance, attribute accessors
+# and attribute accessors.
+
+import 'fonts'
+import 'reset'
+
+class header:
+      background: rgb(255, 255, 255)
+      margins: { right => 0.5, bottom => 0.5 }
+      padding: 1
+      
+      # instead of div.header { foo: bar; }
+      if parent.is?(div):
+         # do something
+
+class footer < header:
+      min-height: 15
+      border: 1px solid blue
+
+class button:
+      color: blue
+
+      if hover:
+         color: red
+      elsif active:
+         color: green
+
+id featured:
+      background: header.background
+      border: footer.border
+      
+
+# compiles to =>
+
+.header, .footer {
+  background: rgb(255, 255, 255);
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 1em;
+}
+
+.footer {
+  min-height: 15em;
+  border: 1px solid blue;
+}
+
+.button {
+  color: blue;
+}
+
+.button:hover {
+  color: red;
+}
+
+#featured {
+  background: rgb(255, 255, 255);
+  border: 1px solid blue;
+}
