@@ -15,14 +15,20 @@
 import 'fonts'
 import 'reset'
 
+# variables for storing a color or path to file
+@body_bg: rgb(120, 125, 10)
+@link_img: "/images/link_bg.png"
+
 class header:
       background: rgb(255, 255, 255)
       margins: { right => 0.5, bottom => 0.5 }
       padding: 1
       
       # instead of div.header { foo: bar; }
-      if parent.is?(div):
+      if parent == div:
          # do something
+      elsif parent == ul:
+         # do something else
 
 class footer < header:
       min-height: 15
