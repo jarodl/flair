@@ -3,12 +3,12 @@ require 'lexer'
 
 code = <<-EOS
 class Wrapper:
-    background = rgb(255, 255, 255)
+    background = "rgb(255, 255, 255)"
     padding = 1
 
 id Navigation:
-    background = rgb(40, 40, 40)
-    float = left
+    background = "rgb(40, 40, 40)"
+    float = "left"
 EOS
 
-p Lexer.new.tokenize(code)
+p Flair::Lexer.new(code).tokenize
