@@ -1,5 +1,16 @@
+class Node
+  # make CSS with two tabs
+  TAB = '  '
+
+  def line_ending
+    ';'
+  end
+
+end
 # Collection of nodes, each one representing an expression.
-class Nodes
+class Nodes < Node
+  attr_reader :nodes
+
   def initialize(nodes)
     @nodes = nodes
   end
@@ -14,61 +25,21 @@ class Nodes
   # of its evaluation by implementing the "eval" method.
   # The "context" variable is the environment in which the node
   # is evaluated (local variables, current class, etc.).
-  def eval(context)
+  def compile(indent='')
     # The last value evaluated in a method is the return value.
-    @nodes.map { |node| node.eval(context) }.last
+    @nodes.map { |node| node.compile(indent) }.last
   end
 end
 
-# Literals are static values that have a Ruby representation,
+# Literals are static values
 # eg.: a string, true, false, nil, etc.
-class LiteralNode
+class LiteralNode < Node
   def initialize(value)
     @value = value
   end
 
-  def eval(context)
-    # Here we access the Runtime, which we'll see in the next section.
-    case @value
-    when Numeric
-      Runtime["Number"].new_value(@value)
-    when String
-      Runtime["String"].new_value(@value)
-    when TrueClass
-      Runtime["true"]
-    when FalseClass
-      Runtime["false"]
-    when NilClass
-      Runtime["nil"]
-    else
-      raise "Unknown literal type: " + @value.class.name
-    end
-  end
-end
-
-# Node of a method call or local variable access, can take any
-# of these forms:
-#
-#   method # this form can also be a local variable
-#   receiver.method
-#
-class CallNode
-  def initialize(receiver, method) # no arguments for now
-    @receiver = receiver
-    @method = method
-  end
-
-  def eval(context)
-    # If there's no receiver and the method name is the name of a local
-    # variable then it's local variable access.
-    if @receiver.nil? && context.locals[@method]
-      context.locals[@method]
-
-    # Method call
-    else
-      receiver = @receiver.eval(context)
-      receiver.call(@method)
-    end
+  def compile(indent)
+    @value.to_s
   end
 end
 
@@ -76,85 +47,68 @@ end
 # another class' attributes instead of the CallNode class above.
 #
 # Retrieving the value of a constant
-class GetConstantNode
+class GetConstantNode < Node
   def initialize(name)
     @name = name
   end
 
-  def eval(context)
-    context[@name]
+  def compile(indent)
   end
 end
 
 # Setting the value of a constant.
-class SetConstantNode
+class SetConstantNode < Node
   def initialize(name, value)
     @name = name
     @value = value
   end
 
-  def eval(context)
-    context[@name] = @value.eval(context)
+  def compile(indent)
   end
 end
 
 # Setting the value of a local variable.
-class SetLocalNode
+class SetLocalNode < Node
   def initialize(name, value)
     @name = name
     @value = value
   end
 
-  def eval(context)
-    context.locals[@name] = @value.eval(context)
+  def compile(indent)
+    "#{@name}: #{@value.compile(indent)};"
   end
 end
 
 # Class definition
-class ClassNode
+class ClassNode < Node
   def initialize(name, body)
     @name = name
     @body = body
   end
 
-  def eval(context)
-    # Create the class and put it's value in a constant.
-    flair_class = FlairClass.new
-    context[@name] = flair_class
-
-    # Evaluate the body of the class in its context. Providing a custom
-    # context to control where variables are defined.
-    # case, we add them to the newly created class.
-    @body.eval(Context.new(flair_class, flair_class))
-
-    flair_class
+  def compile(indent)
+    ".#{@name.downcase} { \n#{TAB}#{@body.compile}\n }"
   end
 end
 
-class IfNode
+class IfNode < Node
   def initialize(condition, body, else_body=nil)
     @condition = condition
     @body = body
     @else_body = else_body
   end
 
-  def eval(context)
+  def compile(context)
   end
 end
 
 # Id definition
-class IdNode
+class IdNode < Node
   def initialize(name, body)
     @name = name
     @body = body
   end
 
-  def eval(context)
-    flair_id = FlairId.new
-    context[@name] = flair_id
-
-    @body.eval(Context.new(flair_id, flair_id))
-
-    flair_id
+  def compile(context)
   end
 end
