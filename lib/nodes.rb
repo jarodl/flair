@@ -131,6 +131,17 @@ class ClassNode
   end
 end
 
+class IfNode
+  def initialize(condition, body, else_body=nil)
+    @condition = condition
+    @body = body
+    @else_body = else_body
+  end
+
+  def eval(context)
+  end
+end
+
 # Id definition
 class IdNode
   def initialize(name, body)

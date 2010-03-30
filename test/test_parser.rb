@@ -5,6 +5,9 @@ code = <<-EOS
 class Wrapper:
     background = "rgb(255, 255, 255)"
     padding = 1
+    
+    if true:
+        color = "red"
 
 id Navigation:
     background = "rgb(40, 40, 40)"

@@ -2,6 +2,7 @@ class Parser
 
 token CLASS
 # token IF ELSE # leave out if and if-else for now
+token IF
 token ID
 token NEWLINE
 token NUMBER
@@ -36,7 +37,7 @@ rule
   | Assign
   | Class
   | Id
-  # | If # for adding if statements later
+  | If # for adding if statements later
   ;
 
   # All tokens that can terminate an expression
@@ -90,13 +91,12 @@ rule
   ;
 
   # if and if-else block
-  # If:
-  #   IF Expression Block               { result = IfNode.new(val[1],
-  #   val[2]) }
+  If:
+    IF Expression Block               { result = IfNode.new(val[1], val[2]) }
   # | IF Expression Block NEWLINE
   #   ELSE Block                        { result = IfNode.new(val[1],
   #   val[2], val[5])  }
-  # ;
+  ;
 
   # A block of indented code. All of the hard work is done by the lexer.
   Block:
