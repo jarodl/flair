@@ -5,8 +5,10 @@ code = <<-EOS
 class Wrapper:
     background = "rgb(255, 255, 255)"
     padding = 1
+    
     if true:
         color = "red"
+    
     test = "true"
 
 
