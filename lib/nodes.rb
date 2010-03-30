@@ -43,6 +43,16 @@ class LiteralNode < Node
   end
 end
 
+class CallNode < Node
+  def initialize(receiver, method)
+    @receiver = receiver
+    @method = method
+  end
+
+  def compile(indent)
+  end
+end
+
 # This might be the only thing we need to retrieve
 # another class' attributes instead of the CallNode class above.
 #
@@ -87,7 +97,7 @@ class ClassNode < Node
   end
 
   def compile(indent)
-    ".#{@name.downcase} { \n#{TAB}#{@body.compile}\n }"
+    ".#{@name.downcase} { \n#{TAB}#{@body.compile}\n}"
   end
 end
 
@@ -110,5 +120,6 @@ class IdNode < Node
   end
 
   def compile(context)
+    "##{@name.downcase} { \n#{TAB}#{@body.compile}\n}"
   end
 end
