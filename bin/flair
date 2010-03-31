@@ -1,0 +1,14 @@
+#! /usr/local/bin/ruby -w
+
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+require 'parser'
+
+if ARGV[0]
+  puts "compiling..."
+  code = File.open(ARGV[0], "rb").read
+  flair = Parser.new.parse(code).compile
+  File.open(ARGV[0].gsub(/[.][a-zA-Z]+$/, '.css'), 'w') { |f| f.write(flair) }
+else
+  puts "Usage: ./flair code.flair"
+end
+

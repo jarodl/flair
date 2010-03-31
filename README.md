@@ -3,10 +3,10 @@ Flair
 
 Flair is a little "language" that "compiles" into CSS.
 
-Compile a flair script:
+Compile a flair script: (an example is provided in `/bin`)
 
-    flair /path/to/script.flair
-    => creates script.css
+    flair /example/code.flair
+    => creates code.css
 
 ### Examples that work: (for right now) ###
 
@@ -46,7 +46,7 @@ Flair was inspired by
 Language"](http://createyourproglang.com). It is
 meant for developers who do not enjoy writing CSS. Flair translates into normal CSS.
 
-## IDEAS: ##
+## Ideas: ##
 * allow classes and identifiers to 'inherit' from each other
 * access class and indentifier attributes from other classes/identifiers
 * should be able to set attributes on condition (active, hover, etc)

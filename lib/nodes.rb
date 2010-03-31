@@ -21,13 +21,13 @@ class Nodes < Node
   end
 
   # This method is the "interpreter" part of our language.
-  # All nodes know how to eval itself and returns the result
-  # of its evaluation by implementing the "eval" method.
-  # The "context" variable is the environment in which the node
+  # All nodes know how to compile themselves and return the result
+  # of its evaluation by implementing the "compile" method.
+  # The "indent" variable is the environment in which the node
   # is evaluated (local variables, current class, etc.).
   def compile(indent='')
     # The last value evaluated in a method is the return value.
-    @nodes.map { |node| node.compile(indent) }.last
+    @nodes.map { |node| node.compile(indent) }
   end
 end
 
@@ -85,7 +85,7 @@ class SetLocalNode < Node
   end
 
   def compile(indent)
-    "#{@name}: #{@value.compile(indent)};"
+    "#{TAB}#{@name}: #{@value.compile(indent)}#{line_ending}\n"
   end
 end
 
@@ -97,7 +97,7 @@ class ClassNode < Node
   end
 
   def compile(indent)
-    ".#{@name.downcase} { \n#{TAB}#{@body.compile}\n}"
+    ".#{@name.downcase} {\n#{@body.compile}}\n\n"
   end
 end
 
@@ -120,6 +120,6 @@ class IdNode < Node
   end
 
   def compile(context)
-    "##{@name.downcase} { \n#{TAB}#{@body.compile}\n}"
+    "##{@name.downcase} {\n#{@body.compile}}\n\n"
   end
 end

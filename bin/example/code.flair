@@ -1,0 +1,7 @@
+class Header:
+    background = "grey"
+    margin = 10
+
+id Footer:
+    padding = 10
+    height = 120
