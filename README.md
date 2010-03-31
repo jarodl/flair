@@ -45,12 +45,11 @@ Flair was inspired by
 Language"](http://createyourproglang.com). It is
 meant for developers who do not enjoy writing CSS.
 
------------------------------------------------------------------------
 
-Future of Flair:
-================
+# Future of Flair: #
 
 ## Ideas: ##
+
 * allow classes and identifiers to 'inherit' from each other
 * access class and indentifier attributes from other classes/identifiers
 * should be able to set attributes on condition (active, hover, etc)
