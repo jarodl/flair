@@ -37,14 +37,18 @@ compiles to:
     }
 
 
-More About Flair:
-============
+## More About Flair: ##
 
 Flair was inspired by
 [Coffee-Script](http://github.com/jashkenas/coffee-script) and the book
 ["Create Your Own Freaking Awesome Programming
 Language"](http://createyourproglang.com). It is
-meant for developers who do not enjoy writing CSS. Flair translates into normal CSS.
+meant for developers who do not enjoy writing CSS.
+
+-----------------------------------------------------------------------
+
+Future of Flair:
+================
 
 ## Ideas: ##
 * allow classes and identifiers to 'inherit' from each other
