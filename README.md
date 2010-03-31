@@ -5,8 +5,11 @@ Flair is a little "language" that "compiles" into CSS.
 
 Compile a flair script: (an example is provided in `/bin`)
 
-    flair /example/code.flair
+    ./flair /example/code.flair
     => creates code.css
+
+This project is just getting started, if you have any ideas or
+suggestions please open an issue [here](http://github.com/jarodluebbert/flair/issues).
 
 ### Examples that work: (for right now) ###
 
@@ -36,15 +39,18 @@ compiles to:
        float: left;
     }
 
+## Author: ##
 
-## More About Flair: ##
+[Jarod Luebbert](http://github.com/jarodluebbert)
+
+More About Flair:
+-----------------
 
 Flair was inspired by
 [Coffee-Script](http://github.com/jashkenas/coffee-script) and the book
 ["Create Your Own Freaking Awesome Programming
 Language"](http://createyourproglang.com). It is
 meant for developers who do not enjoy writing CSS.
-
 
 # Future of Flair: #
 

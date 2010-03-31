@@ -11,4 +11,3 @@ if ARGV[0]
 else
   puts "Usage: ./flair code.flair"
 end
-
