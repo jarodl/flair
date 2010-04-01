@@ -1,7 +1,8 @@
 class Header:
-    background = "grey"
+    background-color = "grey"
     margin = 10
 
 id Footer:
     padding = 10
     height = 120
+

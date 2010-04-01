@@ -8,7 +8,7 @@ module Flair
     KEYWORDS = ["if", "class", "id", "true", "false", "nil"]
 
     REGEX = {
-      :identifier => /\A([a-z]\w*)/,
+      :identifier => /\A([a-z]\w*[-]?\w*)/,
       :constant => /\A([A-Z]\w*)/,
       :number => /\A([0-9]+)/,
       :string => /\A"(.*?)"/,
@@ -62,11 +62,13 @@ module Flair
     # class, id, etc.
     def identifier
       return unless t = @scanner.scan(REGEX[:identifier])
-      # Keywords are special identifiers with their own name, for example
-      # 'class' would have the token [:CLASS, "class"]
       if KEYWORDS.include?(t)
+        # Keywords are special identifiers with their own name, for example
+        # 'class' would have the token [:CLASS, "class"]
         [t.upcase.to_sym, t]
       else
+        # Anything that is not a keyword is an identifier, such as
+        # [:IDENTIFIER, "background"] for something like background="red"
         [:IDENTIFIER, t]
       end
     end
